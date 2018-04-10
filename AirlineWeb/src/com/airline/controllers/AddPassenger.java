@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -127,8 +128,23 @@ public class AddPassenger extends HttpServlet {
 			view.forward(request, response);
 		} else {
 			System.out.println("New Passenger Object: " + p);
-			ArrayList<Passenger> pList = new ArrayList<Passenger>();
-			pList.add(p);
+			
+			
+			//Here we mess with ServletContext. ServletContext is a call to the application scope.
+			ServletContext sc = this.getServletContext();
+			
+			//Sort-of solution to below issue: Pull the current list.
+			//If no list, then what? This is where we use LISTENERS (Which I don't know wtf they are)
+			
+			ArrayList<Passenger> pList = (ArrayList<Passenger>) sc.getAttribute("passengers");
+			pList.add(p); 
+			 
+			
+			sc.setAttribute("passengers", pList); //This has an issue: What if another user has already submitted
+			//A passenger List? This one will overwrite that one, which is no bueno.
+			//Fix by getting the current list (if there is one) and adding to it.
+			//This poses a potential conflict, what if two users at same time for same update? Holy shit
+			//This is where read/write locks will end up coming in. 
 			
 			//Redirect to the results page.
 			//This will create a brand new request, so we are no longer in Request scope!

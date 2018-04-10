@@ -11,7 +11,7 @@
 <body>
 	<h2>Welcome to World Adventures Airlines!</h2>
 	<div class="container">
-		<div class="title">Add a passenger!</div>
+		<div class="title">New Passenger Form</div>
 
 		<%
 			if (request.getAttribute("errors") != null) {
@@ -28,7 +28,7 @@
 				<%
 					}
 				%>
-				
+
 				<%
 					if (request.getAttribute("lastNameError") != null) {
 				%>
@@ -36,7 +36,7 @@
 				<%
 					}
 				%>
-				
+
 				<%
 					if (request.getAttribute("dateFormatError") != null) {
 				%>
@@ -44,7 +44,7 @@
 				<%
 					}
 				%>
-			
+
 			</ul>
 		</fieldset>
 		<%

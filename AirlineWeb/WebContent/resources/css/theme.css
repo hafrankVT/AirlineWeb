@@ -74,6 +74,12 @@ body {
 	line-height: 27px;
 }
 
+.error {
+	color: darkred;
+	margin-right: 10px;
+	line-height: 27px;
+}
+
 input, select {
 	vertical-align: middle;
 	height: 40px;

@@ -30,7 +30,7 @@
 				%>
 				
 				<%
-					if (request.getAttribute("LastNameError") != null) {
+					if (request.getAttribute("lastNameError") != null) {
 				%>
 				<li class="error">Last Name Error</li>
 				<%

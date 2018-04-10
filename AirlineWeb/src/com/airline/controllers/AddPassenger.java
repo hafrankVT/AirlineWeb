@@ -16,27 +16,29 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AddPassenger
  */
-@WebServlet("/AddPassenger") //This is the URL path to our servlet.
+@WebServlet("/AddPassenger") // This is the URL path to our servlet.
 public class AddPassenger extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddPassenger() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//Forward to the .jsp to display the passenger add form.
-		
+	public AddPassenger() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// Forward to the .jsp to display the passenger add form.
+
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_passenger.jsp");
-		view.forward(request, response); //This forwards the request to the add_passenger.jsp
+		view.forward(request, response); // This forwards the request to the add_passenger.jsp
 	}
 
 	/**
@@ -102,6 +104,13 @@ public class AddPassenger extends HttpServlet {
 		String gender = request.getParameter("gender");
 		System.out.println("Gender: " + gender);
 		
+		
+		//NOW, check for errors (if flag == true).
+		if ((boolean) request.getAttribute("errors")) {
+			//Forward back to the form jsp
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_passenger.jsp");
+			view.forward(request, response);
+		}
 		
 	}
 

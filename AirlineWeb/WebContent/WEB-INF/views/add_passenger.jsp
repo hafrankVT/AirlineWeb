@@ -12,6 +12,45 @@
 	<h2>Welcome to World Adventures Airlines!</h2>
 	<div class="container">
 		<div class="title">Add a passenger!</div>
+
+		<%
+			if (request.getAttribute("errors") != null) {
+		%>
+		<!-- This will only be displayed if there are errors -->
+		<!-- Could probably use tags like this to just add a tag or label outside the actual form, or change the CSS to highlight it. -->
+		<fieldset>
+			<legend>Errors</legend>
+			<ul>
+				<%
+					if (request.getAttribute("firstNameError") != null) {
+				%>
+				<li class="error">First Name Error</li>
+				<%
+					}
+				%>
+				
+				<%
+					if (request.getAttribute("LastNameError") != null) {
+				%>
+				<li class="error">Last Name Error</li>
+				<%
+					}
+				%>
+				
+				<%
+					if (request.getAttribute("dateFormatError") != null) {
+				%>
+				<li class="error">Date of Birth Invalid</li>
+				<%
+					}
+				%>
+			
+			</ul>
+		</fieldset>
+		<%
+			}
+		%>
+
 		<fieldset>
 			<legend>Passenger Details</legend>
 			<form action="AddPassenger" method="post">

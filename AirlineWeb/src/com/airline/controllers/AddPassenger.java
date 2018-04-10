@@ -65,7 +65,7 @@ public class AddPassenger extends HttpServlet {
 		}
 		
 		String dob_raw = request.getParameter("dob");
-		String dob_pattern = "^\\d{1,2]\\/\\d{1,2}\\/d{4}$"; //RegExp for checking that date is in MM/DD/YYY format
+		String dob_pattern = "^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$"; //RegExp for checking that date is in MM/DD/YYY format
 		Pattern r = Pattern.compile(dob_pattern);
 		
 		Matcher m = r.matcher(dob_raw);

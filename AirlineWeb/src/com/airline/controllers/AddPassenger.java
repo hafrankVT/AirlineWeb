@@ -67,6 +67,9 @@ public class AddPassenger extends HttpServlet {
 		String dob_raw = request.getParameter("dob");
 		String dob_pattern = "^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$"; //RegExp for checking that date is in MM/DD/YYY format
 		Pattern r = Pattern.compile(dob_pattern);
+		System.out.println("New Passenger Information:");
+		System.out.println("First Name:" + firstName);
+		System.out.println("Last Name: " + lastName);
 		
 		Matcher m = r.matcher(dob_raw);
 		if (m.find()) {
@@ -86,15 +89,18 @@ public class AddPassenger extends HttpServlet {
 			
 			//Now, get the date from the calendar
 			Date dob = cal.getTime();
+			System.out.println(dob);
 		}
 		else {
 			System.out.println("Date Formatting Error.");
 			request.setAttribute("errors", true);
 			request.setAttribute("dateFormatError", true);
 		}
+		
 
 		//From our form, gender shouldn't be empty so no need to verify (For this project. Best practice: Verify EVERYTHING.)
 		String gender = request.getParameter("gender");
+		System.out.println("Gender: " + gender);
 		
 		
 	}

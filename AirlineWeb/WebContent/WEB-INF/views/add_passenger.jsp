@@ -5,13 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>World Adventures Airlines</title>
-<link rel="stylesheet" href="/resources/css/normalize.css">
-<link rel="stylesheet" href="/resources/css/theme.css">
+<link rel="stylesheet" href="resources/css/normalize.css">
+<link rel="stylesheet" href="resources/css/theme.css">
 </head>
 <body>
 	<h2>Welcome to World Adventures Airlines!</h2>
 	<div class="container">
-		<div class="title">Add a passenger</div>
+		<div class="title">Add a passenger!</div>
 		<fieldset>
 			<legend>Passenger Details</legend>
 			<form action="AddPassenger" method="post">
@@ -26,7 +26,7 @@
 				</div>
 
 				<div class="inputField">
-					<label for="fob" class="inputlabel">Date of Birth:</label> <input
+					<label for="dob" class="inputlabel">Date of Birth:</label> <input
 						name="dob" type="text" />
 				</div>
 

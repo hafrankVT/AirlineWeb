@@ -1,7 +1,10 @@
 package com.airline.controllers;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,8 +45,57 @@ public class AddPassenger extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// This will allow us to process the submitted form info.
 		
+		request.setAttribute("errors", false);
+		
 		String firstName = request.getParameter("first-name");
+		if (firstName.length() == 0) {
+			//Print error to system.out (or logger?) and set an error flag in the attributes.
+			System.out.println("Empty first name error.");
+			request.setAttribute("errors", true);
+			request.setAttribute("firstNameError", true);
+		}
+		
 		String lastName = request.getParameter("last-name");
+		
+		if (lastName.length() == 0) {
+			//Print error to system.out (or logger?) and set an error flag in the attributes.
+			System.out.println("Empty last name error.");
+			request.setAttribute("errors", true);
+			request.setAttribute("lastNameError", true);
+		}
+		
+		String dob_raw = request.getParameter("dob");
+		String dob_pattern = "^\\d{1,2]\\/\\d{1,2}\\/d{4}$"; //RegExp for checking that date is in MM/DD/YYY format
+		Pattern r = Pattern.compile(dob_pattern);
+		
+		Matcher m = r.matcher(dob_raw);
+		if (m.find()) {
+			//Split the DoB string into individual parts.
+			String dobArray[] = dob_raw.split("\\/");
+			
+			//Assign the different parts of the array to individual Strings.
+			String month = dobArray[0];
+			String day = dobArray[1];
+			String year = dobArray[2];
+			
+			//Convert to Date object
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.YEAR, Integer.parseInt(year));
+			cal.set(Calendar.MONTH, Integer.parseInt(month));
+			cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
+			
+			//Now, get the date from the calendar
+			Date dob = cal.getTime();
+		}
+		else {
+			System.out.println("Date Formatting Error.");
+			request.setAttribute("errors", true);
+			request.setAttribute("dateFormatError", true);
+		}
+
+		//From our form, gender shouldn't be empty so no need to verify (For this project. Best practice: Verify EVERYTHING.)
+		String gender = request.getParameter("gender");
+		
 		
 	}
 

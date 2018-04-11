@@ -34,6 +34,7 @@ public class MainPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		
+		out.println("The current list of passengers is as follows: ");
 		ServletContext sc = this.getServletContext();
 		ArrayList<Passenger> pList = (ArrayList<Passenger>) sc.getAttribute("passengers");
 		for (int i=0; i<pList.size(); i++) {

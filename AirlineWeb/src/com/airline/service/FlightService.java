@@ -1,6 +1,5 @@
 package com.airline.service;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 /**
@@ -11,7 +10,7 @@ import javax.ejb.Stateless;
 			// environment.
 			// cannot access from any other computers or anything.
 		//Can be removed now that the flightLocal interface is what's being implemented.
-public class FlightService implements FlightLocal {
+public class FlightService implements FlightLocal, FlightRemote{
 
 	/**
 	 * Default constructor.

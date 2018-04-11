@@ -7,10 +7,10 @@ import javax.ejb.Stateless;
  * Session Bean implementation class FlightService
  */
 @Stateless // Declared as a stateless session bean
-@LocalBean // Declares this to be local, can only be accessed from applications on the same
+//@LocalBean // Declares this to be local, can only be accessed from applications on the same
 			// environment.
 			// cannot access from any other computers or anything.
-public class FlightService {
+public class FlightService implements FlightLocal {
 
 	/**
 	 * Default constructor.

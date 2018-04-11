@@ -26,6 +26,8 @@ public class FlightDetails extends HttpServlet {
 	@EJB
 	private FlightLocal fs;
 	//Now we are using an interface instead of the regular bean.
+	
+
 
 
 //	private FlightService fs = null;

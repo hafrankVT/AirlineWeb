@@ -1,21 +1,21 @@
 package com.airline.service;
 
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 
 /**
  * Session Bean implementation class FlightService
  */
-@Stateless // Declared as a stateless session bean
+@Stateful //Now it's a stateful bean!
 //@LocalBean // Declares this to be local, can only be accessed from applications on the same
 			// environment.
 			// cannot access from any other computers or anything.
 		//Can be removed now that the flightLocal interface is what's being implemented.
-public class FlightService implements FlightLocal {
+public class FlightServiceStatefulBean implements FlightLocal {
 
 	/**
 	 * Default constructor.
 	 */
-	public FlightService() {
+	public FlightServiceStatefulBean() {
 		// TODO Auto-generated constructor stub
 	}
 

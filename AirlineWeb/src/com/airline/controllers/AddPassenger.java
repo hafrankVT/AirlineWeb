@@ -118,7 +118,7 @@ public class AddPassenger extends HttpServlet {
 		// project. Best practice: Verify EVERYTHING.)
 		String gender = request.getParameter("gender");
 		p.setGender(Gender.valueOf(gender));
-		
+
 		System.out.println("Gender: " + gender);
 
 		// NOW, check for errors (if flag == true).
@@ -128,30 +128,25 @@ public class AddPassenger extends HttpServlet {
 			view.forward(request, response);
 		} else {
 			System.out.println("New Passenger Object: " + p);
-			
-			
-			//Here we mess with ServletContext. ServletContext is a call to the application scope.
+
+			// Here we mess with ServletContext. ServletContext is a call to the application
+			// scope.
 			ServletContext sc = this.getServletContext();
-			
-			//Sort-of solution to below issue: Pull the current list.
-			//If no list, then what? This is where we use LISTENERS (Which I don't know wtf they are)
-			
-			ArrayList<Passenger> pList = (ArrayList<Passenger>) sc.getAttribute("passengers");
-			pList.add(p); 
-			 
-			
-			sc.setAttribute("passengers", pList); //This has an issue: What if another user has already submitted
-			//A passenger List? This one will overwrite that one, which is no bueno.
-			//Fix by getting the current list (if there is one) and adding to it.
-			//This poses a potential conflict, what if two users at same time for same update? Holy shit
-			//This is where read/write locks will end up coming in. 
-			
-			//Redirect to the results page.
-			//This will create a brand new request, so we are no longer in Request scope!
-			//Need to create a new servlet for this to redirect to!
+
+			//Synchronized block which will allow only one user at a time to use this section of code.
+			//Prevents issues with both users pulling a list, adding a passenger and overwriting the values.
+			synchronized (this) {
+				ArrayList<Passenger> pList = (ArrayList<Passenger>) sc.getAttribute("passengers");
+				pList.add(p);
+
+				sc.setAttribute("passengers", pList); //Add the user to the list
+
+				// Redirect to the results page.
+				// This will create a brand new request, so we are no longer in Request scope!
+				// Need to create a new servlet for this to redirect to!
+			}
 			response.sendRedirect("");
 		}
-	
 
 	}
 

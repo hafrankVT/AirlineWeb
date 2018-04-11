@@ -54,7 +54,8 @@ public class FlightDetails extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		out.println("The flight details servlet has been called!");
-		out.println("Flight Details: \n From: " + fs.getFrom() + " " + fs.getTo());
+		out.println("Flight Details: \n From: " + fs.getFrom() + ", To: " + fs.getTo());
+		out.println("Flight Details (Stateful) : \n From: " + fsStateful.getFrom() + ", To: " + fsStateful.getTo());
 
 		/* This is example of using JNDI lookup instead of plain ol injection.
 		 * try {

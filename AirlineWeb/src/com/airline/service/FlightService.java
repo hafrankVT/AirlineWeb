@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 //@LocalBean // Declares this to be local, can only be accessed from applications on the same
 			// environment.
 			// cannot access from any other computers or anything.
+		//Can be removed now that the flightLocal interface is what's being implemented.
 public class FlightService implements FlightLocal {
 
 	/**

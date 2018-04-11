@@ -39,6 +39,11 @@ public class AddPassenger extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		//Initialize form values (I know there has to be a better way of doing this.)
+		request.setAttribute("first_name", "");
+		request.setAttribute("last_name", "");
+		request.setAttribute("dob", "");
 
 		// Forward to the .jsp to display the passenger add form.
 
@@ -65,8 +70,10 @@ public class AddPassenger extends HttpServlet {
 			System.out.println("Empty first name error.");
 			request.setAttribute("errors", true);
 			request.setAttribute("firstNameError", true);
+			request.setAttribute("first_name", "");
 		} else {
 			p.setFirstName(firstName);
+			request.setAttribute("first_name", firstName);
 		}
 
 		String lastName = request.getParameter("last-name");
@@ -77,8 +84,10 @@ public class AddPassenger extends HttpServlet {
 			System.out.println("Empty last name error.");
 			request.setAttribute("errors", true);
 			request.setAttribute("lastNameError", true);
+			request.setAttribute("last_name", ""); //Store the attribute for error purposes.
 		} else {
 			p.setLastName(lastName);
+			request.setAttribute("last_name", lastName); //Store the attribute for error purposes.
 		}
 
 		String dob_raw = request.getParameter("dob");
@@ -108,10 +117,12 @@ public class AddPassenger extends HttpServlet {
 			Date dob = cal.getTime();
 			System.out.println(dob);
 			p.setDob(dob);
+			request.setAttribute("dob", dob_raw);
 		} else {
 			System.out.println("Date Formatting Error.");
 			request.setAttribute("errors", true);
 			request.setAttribute("dateFormatError", true);
+			request.setAttribute("dob", dob_raw);
 		}
 
 		// From our form, gender shouldn't be empty so no need to verify (For this

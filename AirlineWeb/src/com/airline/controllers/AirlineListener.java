@@ -42,6 +42,7 @@ public class AirlineListener implements ServletContextListener {
     	if (pList == null) {
     		System.out.println("There is no passenger list yet. Creating one, foo.");
     		pList = new ArrayList<Passenger>();
+    		sc.setAttribute("passengers", pList);
     	}
     }
 	

@@ -5,7 +5,7 @@ import javax.ejb.Stateful;
 /**
  * Session Bean implementation class FlightService
  */
-@Stateful //Now it's a stateful bean!
+@Stateful (name = "flightStateful") //Now it's a stateful bean!
 //@LocalBean // Declares this to be local, can only be accessed from applications on the same
 			// environment.
 			// cannot access from any other computers or anything.

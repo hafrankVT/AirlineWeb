@@ -23,8 +23,11 @@ public class FlightDetails extends HttpServlet {
 	// We don't do this because it will just get a new object, but will strip out
 	// all the EJB features. So, we use annotations to inject.
 
-	@EJB
+	@EJB(beanName = "flightStateless")
 	private FlightLocal fs;
+	
+	@EJB(beanName = "flightStateful")
+	private FlightLocal fsStateful;
 	//Now we are using an interface instead of the regular bean.
 	
 

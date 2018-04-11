@@ -3,7 +3,9 @@ package com.airline.controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.ejb.EJB;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,11 +24,15 @@ public class FlightDetails extends HttpServlet {
 	// private FlightService fs = new FlightService();
 	// We don't do this because it will just get a new object, but will strip out
 	// all the EJB features. So, we use annotations to inject.
-	
-	@EJB
-	private FlightService fs;
-	//This asks the container to give us an object from its "pool" of bean objects.
-	
+
+	// @EJB
+	// private FlightService fs;
+	// Next step, without the EJB tag.
+
+	private FlightService fs = null;
+
+	// This asks the container to give us an object from its "pool" of bean objects.
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -41,12 +47,30 @@ public class FlightDetails extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		PrintWriter out = response.getWriter();
 		out.println("The flight details servlet has been called!");
-		out.println(fs.getAirplaneModel());
-		out.println(fs.getFrom());
-		out.println(fs.getTo());
+
+		try {
+			// JNDI --> Java Name and Directory Interface holds references to resources on
+			// the server, including EJB resources.
+			Context context = new InitialContext(); // This holds the reference to JDNI
+			Object fObj = context.lookup("java:global/AirlineWeb/FlightService!com.airline.service.FlightService");
+			/*
+			 * java:global is the global context. 
+			 * AirlineWeb is the context root where our application is deployed FlightService is the name of the EJB class
+			 * com.airline.service.FlightService is the fully qualified path to the object.
+			 */
+			// Now need to cast the object to the FlightService object.
+			fs = (FlightService) fObj;
+		} catch (NamingException e) {
+			System.out.println("Naming Exception has occured when trying to lookup FlightService Object.");
+			e.printStackTrace();
+		}
+
+		if (fs != null) {
+			out.println("Flight Details: \n From: " + fs.getFrom() + " " + fs.getTo());
+		}
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package com.airline.controllers;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -25,9 +26,14 @@ public class FlightDetails extends HttpServlet {
 
 	@EJB(beanName = "flightStateless")
 	private FlightLocal fs;
+	@EJB(beanName = "flightStateless")
+	private FlightLocal fs2;
 	
 	@EJB(beanName = "flightStateful")
 	private FlightLocal fsStateful;
+	
+	@EJB(beanName = "flightStateful")
+	private FlightLocal fsStateful2;
 	//Now we are using an interface instead of the regular bean.
 	
 
@@ -54,8 +60,22 @@ public class FlightDetails extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		out.println("The flight details servlet has been called!");
-		out.println("Flight Details: \n From: " + fs.getFrom() + ", To: " + fs.getTo());
+		
+		//Stateless Demo
+		out.println("Flight Details (Stateless): \n From: " + fs.getFrom() + ", To: " + fs.getTo());
+		
+		fs2.setFrom("Paris");
+		fs2.setTo("Rome");
+		
+		out.println("Flight Details (Stateless): \n From: " + fs.getFrom() + ", To: " + fs.getTo());
+		
+		//	Stateful demo		
 		out.println("Flight Details (Stateful) : \n From: " + fsStateful.getFrom() + ", To: " + fsStateful.getTo());
+		
+		fsStateful2.setFrom("Paris");
+		fsStateful2.setTo("Rome");
+		out.println("Flight Details (Stateful) : \n From: " + fsStateful.getFrom() + ", To: " + fsStateful.getTo());
+		out.println("Flight Details (Stateful2) : \n From: " + fsStateful2.getFrom() + ", To: " + fsStateful2.getTo());
 
 		/* This is example of using JNDI lookup instead of plain ol injection.
 		 * try {

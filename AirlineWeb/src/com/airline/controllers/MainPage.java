@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.airline.models.Passenger;
+import com.airline.models.Passenger_old;
 
 /**
  * Servlet implementation class MainPage
@@ -37,7 +37,7 @@ public class MainPage extends HttpServlet {
 		
 		out.println("The current list of passengers is as follows: ");
 		ServletContext sc = this.getServletContext();
-		ArrayList<Passenger> pList = (ArrayList<Passenger>) sc.getAttribute("passengers");
+		ArrayList<Passenger_old> pList = (ArrayList<Passenger_old>) sc.getAttribute("passengers");
 		for (int i=0; i<pList.size(); i++) {
 			out.println(pList.get(i));
 		}

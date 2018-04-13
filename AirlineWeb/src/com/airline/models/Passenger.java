@@ -1,43 +1,21 @@
 package com.airline.models;
 
-import java.util.Date;
+import java.io.Serializable;
+import javax.persistence.*;
 
-public class Passenger {
+/**
+ * Entity implementation class for Entity: Passenger
+ *
+ */
+@Entity
+
+public class Passenger implements Serializable {
+
 	
-	private String firstName;
-	private String lastName;
-	private Date dob;
-	private Gender gender;
-	
-	public String getFirstName() {
-		return firstName;
+	private static final long serialVersionUID = 1L;
+
+	public Passenger() {
+		super();
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public Date getDob() {
-		return dob;
-	}
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-	public Gender getGender() {
-		return gender;
-	}
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-	@Override
-	public String toString() {
-		return "Passenger [firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", gender=" + gender
-				+ "]";
-	}
-	
-	
+   
 }

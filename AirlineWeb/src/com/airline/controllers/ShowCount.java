@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.airline.service.CounterBean;
+import com.airline.service.CounterStatefulBean;
 
 /**
  * Servlet implementation class ShowCount
@@ -22,6 +23,9 @@ public class ShowCount extends HttpServlet {
 	
 	@EJB
 	CounterBean cb;
+	
+	@EJB
+	CounterStatefulBean csb;
 	
 	
     /**
@@ -41,7 +45,8 @@ public class ShowCount extends HttpServlet {
 		
 		
 		
-		out.println("The count is: " + cb.getCount());
+		out.println("The count value for SINGLETON bean is: " + cb.getCount());
+		out.println("The count value for STATEFUL  bean is: " + csb.getCount());
 	}
 
 	/**

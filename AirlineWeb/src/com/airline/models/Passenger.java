@@ -101,4 +101,10 @@ public class Passenger implements Serializable {
 		this.flightClass = flightClass;
 	}
 
+	@Override
+	public String toString() {
+		return "Passenger [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob
+				+ ", gender=" + gender + ", flightClass=" + flightClass + "]";
+	}
+
 }

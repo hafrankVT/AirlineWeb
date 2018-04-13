@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.airline.models.Gender;
-import com.airline.models.Passenger_old;
+import com.airline.models.Passenger;
 
 /**
  * Servlet implementation class AddPassenger
@@ -62,7 +62,7 @@ public class AddPassenger extends HttpServlet {
 
 		request.setAttribute("errors", false);
 
-		Passenger_old p = new Passenger_old();
+		Passenger p = new Passenger();
 
 		String firstName = request.getParameter("first-name");
 		if (firstName.length() == 0) {
@@ -148,7 +148,7 @@ public class AddPassenger extends HttpServlet {
 			//Synchronized block which will allow only one user at a time to use this section of code.
 			//Prevents issues with both users pulling a list, adding a passenger and overwriting the values.
 			synchronized (this) {
-				ArrayList<Passenger_old> pList = (ArrayList<Passenger_old>) sc.getAttribute("passengers");
+				ArrayList<Passenger> pList = (ArrayList<Passenger>) sc.getAttribute("passengers");
 				pList.add(p);
 
 				sc.setAttribute("passengers", pList); //Add the user to the list

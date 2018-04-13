@@ -8,7 +8,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import com.airline.models.Passenger_old;
+import com.airline.models.Passenger;
 
 /**
  * Application Lifecycle Listener implementation class AirlineListener
@@ -39,10 +39,10 @@ public class AirlineListener implements ServletContextListener {
     	ServletContext sc = startup.getServletContext();
     	
     	//Double check to make sure there is no arrayList still floating around.
-    	ArrayList<Passenger_old> pList = (ArrayList<Passenger_old>) sc.getAttribute("passengers");
+    	ArrayList<Passenger> pList = (ArrayList<Passenger>) sc.getAttribute("passengers");
     	if (pList == null) {
     		System.out.println("There is no passenger list yet. Creating one, foo.");
-    		pList = new ArrayList<Passenger_old>();
+    		pList = new ArrayList<Passenger>();
     		sc.setAttribute("passengers", pList);
     	}
     }

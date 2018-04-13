@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,8 +17,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.airline.models.FlightClass;
 import com.airline.models.Gender;
 import com.airline.models.Passenger;
+import com.airline.service.PassengerService;
 
 /**
  * Servlet implementation class AddPassenger
@@ -25,6 +28,10 @@ import com.airline.models.Passenger;
 @WebServlet("/AddPassenger") // This is the URL path to our servlet.
 public class AddPassenger extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	
+	@EJB
+	PassengerService ps;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -41,15 +48,42 @@ public class AddPassenger extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//Initialize form values (I know there has to be a better way of doing this.)
-		request.setAttribute("first_name", "");
-		request.setAttribute("last_name", "");
-		request.setAttribute("dob", "");
-
-		// Forward to the .jsp to display the passenger add form.
-
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_passenger.jsp");
-		view.forward(request, response); // This forwards the request to the add_passenger.jsp
+//		//Initialize form values (I know there has to be a better way of doing this.)
+//		request.setAttribute("first_name", "");
+//		request.setAttribute("last_name", "");
+//		request.setAttribute("dob", "");
+//
+//		// Forward to the .jsp to display the passenger add form.
+//
+//		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_passenger.jsp");
+//		view.forward(request, response); // This forwards the request to the add_passenger.jsp
+		
+		//Temporarily removed the doGet stuff so we can play with persistence.
+		
+		Passenger p = new Passenger();
+		//Arbitrary setting just to demonstrate.
+		p.setFirstName("Harry");
+		p.setLastName("Frank");
+		
+		//Create the Date object and set to a date.
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 1985);
+		cal.set(Calendar.MONTH, 3);
+		cal.set(Calendar.DAY_OF_MONTH, 21);
+		
+		Date dob = cal.getTime();
+		
+		p.setDob(dob);
+		
+		p.setGender(Gender.Male);
+		p.setFlightClass(FlightClass.First);
+		
+		System.out.println("Created new Persistable Passenger");
+		System.out.println(p);
+		
+		//This is where we persist by passing the passenger to the PassengerService entity which will then persist it.
+		ps.addPassenger(p);
+		
 	}
 
 	/**

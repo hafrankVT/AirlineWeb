@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: Airplane
@@ -30,6 +31,17 @@ public class Airplane implements Serializable {
 	private String planeModel;
 
 	private Integer seatingCapacity;
+
+	@OneToOne(mappedBy = "airplaneDetail")
+	private Flight flight;
+
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
 
 	public Integer getId() {
 		return id;
@@ -66,7 +78,7 @@ public class Airplane implements Serializable {
 	@Override
 	public String toString() {
 		return "Airplane [id=" + id + ", planeMake=" + planeMake + ", planeModel=" + planeModel + ", seatingCapacity="
-				+ seatingCapacity + "]";
+				+ seatingCapacity + ", flight=" + flight + "]";
 	}
 
 }

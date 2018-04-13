@@ -2,6 +2,7 @@ package com.airline.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -42,6 +46,26 @@ public class Flight implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date flightTime;
+
+	// Here we add in the start of the one to one relationship details.
+	@OneToOne // Annotation saying that this is a one-to-one relationship
+	@JoinColumn(name = "airplane_fk") // We need to specify how the tables are connected, and set FKs.
+	// This sets the column to be named airplane_fk, which lets us know what is
+	// being referenced, and that it's an FK.
+	private Airplane airplaneDetail;
+	
+	
+	//One-To-Many relationship of Pilots
+	@OneToMany(mappedBy = "flightForPilot")
+	private List<Pilot> pilots;
+
+	public List<Pilot> getPilots() {
+		return pilots;
+	}
+
+	public void setPilots(List<Pilot> pilots) {
+		this.pilots = pilots;
+	}
 
 	public Integer getId() {
 		return id;
@@ -79,6 +103,14 @@ public class Flight implements Serializable {
 		return flightTime;
 	}
 
+	public Airplane getAirplaneDetail() {
+		return airplaneDetail;
+	}
+
+	public void setAirplaneDetail(Airplane airplaneDetail) {
+		this.airplaneDetail = airplaneDetail;
+	}
+
 	public void setFlightTime(Date flightTime) {
 		this.flightTime = flightTime;
 	}
@@ -86,7 +118,8 @@ public class Flight implements Serializable {
 	@Override
 	public String toString() {
 		return "Flight [id=" + id + ", flightOrigin=" + flightOrigin + ", flightDestination=" + flightDestination
-				+ ", price=" + price + ", flightTime=" + flightTime + "]";
+				+ ", price=" + price + ", flightTime=" + flightTime + ", airplaneDetail=" + airplaneDetail + ", pilots="
+				+ pilots + "]";
 	}
 
 	// Eventually (In future steps) we will add extra fields here!

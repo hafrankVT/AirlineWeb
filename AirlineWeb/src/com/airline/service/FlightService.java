@@ -62,9 +62,16 @@ public class FlightService {
 		pList.add(p);
 		f.setPilots(pList);
 		p.setFlightForPilot(f);
-		
 
 		// This adds the pilots to a list, updates the list on the Flight.
+	}
+
+	public List<Flight> getFlights() {
+
+		TypedQuery<Flight> query = em.createQuery("SELECT f FROM Flight f", Flight.class); //Some confusion still on the naming in these queries.
+		List<Flight> result = query.getResultList(); //This executes the query and gets the result list.
+		return result;
+
 	}
 
 }

@@ -120,8 +120,7 @@ public class Flight implements Serializable {
 	@Override
 	public String toString() {
 		return "Flight [id=" + id + ", flightOrigin=" + flightOrigin + ", flightDestination=" + flightDestination
-				+ ", price=" + price + ", flightTime=" + flightTime + ", airplaneDetail=" + airplaneDetail + ", pilots="
-				+ pilots + "]";
+				+ ", price=" + price + ", flightTime=" + flightTime + "]";
 	}
 
 	// Eventually (In future steps) we will add extra fields here!

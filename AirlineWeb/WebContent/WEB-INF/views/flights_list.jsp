@@ -11,6 +11,7 @@
 	<H1>List of Flights</H1>
 	<table>
 		<tr>
+			<th>Id</th>
 			<th>From</th>
 			<th>To</th>
 			<th>Time</th>
@@ -27,6 +28,7 @@
 			for (int i = 0; i < fList.size(); i++) {
 		%>
 		<tr>
+			<td><%=fList.get(i).getId() %></td>
 			<td><%=fList.get(i).getFlightOrigin()%></td>
 			<td><%=fList.get(i).getFlightDestination()%></td>
 			<td><%=fList.get(i).getFlightTime()%></td>

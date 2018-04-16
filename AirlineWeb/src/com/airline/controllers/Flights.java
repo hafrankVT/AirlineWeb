@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,11 +42,10 @@ public class Flights extends HttpServlet {
 		
 		request.setAttribute("flight_list", flightList);
 		//Print the list!
-		PrintWriter out = response.getWriter();
-		System.out.println("List aquired!");
-		for (int i=0; i<flightList.size(); i++) {
-			out.println(flightList.get(i));
-		}
+		
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/flights_list.jsp");
+		
+		view.forward(request, response);
 	}
 
 	/**

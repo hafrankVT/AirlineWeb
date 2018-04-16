@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +59,7 @@ public class Flight implements Serializable {
 	
 	
 	//One-To-Many relationship of Pilots
-	@OneToMany(mappedBy = "flightForPilot")
+	@OneToMany(mappedBy = "flightForPilot", fetch = FetchType.EAGER)
 	private List<Pilot> pilots;
 
 	public List<Pilot> getPilots() {

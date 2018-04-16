@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -51,7 +52,7 @@ public class Flight implements Serializable {
 	private Date flightTime;
 
 	// Here we add in the start of the one to one relationship details.
-	@OneToOne // Annotation saying that this is a one-to-one relationship
+	@OneToOne( cascade = {CascadeType.PERSIST, CascadeType.REMOVE})// Annotation saying that this is a one-to-one relationship
 	@JoinColumn(name = "airplane_fk") // We need to specify how the tables are connected, and set FKs.
 	// This sets the column to be named airplane_fk, which lets us know what is
 	// being referenced, and that it's an FK.

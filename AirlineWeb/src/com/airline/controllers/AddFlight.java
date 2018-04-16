@@ -1,6 +1,7 @@
 package com.airline.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,6 +26,7 @@ public class AddFlight extends HttpServlet {
 
 	@EJB
 	FlightService fs;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -41,6 +43,22 @@ public class AddFlight extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		PrintWriter out = response.getWriter();
+		out.println(
+				"Hello! You have reached this page's GET Method instead of the POST. So would you kindly make like a tree... and GTFO of here?");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		//PERSONAL NOTE FOR THE NEXT TIME I THINK ABOUT THIS
+		//Trying to do validation IN THIS BLOCK is super sloppy. Maybe have a bean, servlet or class
+		//like validate.java which contains all our validation methods? If good, returns true, if false
+		//maybe returns a session variable with error codes? Trying to validate in here is sloppy as fuck.
 		// Make a Flight Object
 		Flight f = new Flight();
 		f.setFlightOrigin(FlightDestinations.The_Shire);
@@ -69,18 +87,8 @@ public class AddFlight extends HttpServlet {
 
 		System.out.println("The Flight object is:" + f);
 		System.out.println("The Airplane object is:" + a);
-		
-		fs.addFlight(f, a);
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		fs.addFlight(f, a);
 	}
 
 }

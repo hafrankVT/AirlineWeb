@@ -44,7 +44,7 @@ public class Flights extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("List aquired!");
 		for (int i=0; i<flightList.size(); i++) {
-			out.println(flightList.get(i).get
+			out.println(flightList.get(i));
 		}
 	}
 

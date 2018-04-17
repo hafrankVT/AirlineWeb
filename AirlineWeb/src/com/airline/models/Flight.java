@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -62,9 +64,21 @@ public class Flight implements Serializable {
 	//One-To-Many relationship of Pilots
 	@OneToMany(mappedBy = "flightForPilot", fetch = FetchType.EAGER)
 	private List<Pilot> pilots;
+	
+	@ManyToMany
+	@JoinTable(name = "Flights_to_Passengers", joinColumns = @JoinColumn(name = "flight_fk"), inverseJoinColumns = @JoinColumn(name = "passenger_fk"))
+	private List<Passenger> passengers;
 
 	public List<Pilot> getPilots() {
 		return pilots;
+	}
+
+	public List<Passenger> getPassengers() {
+		return passengers;
+	}
+
+	public void setPassengers(List<Passenger> passengers) {
+		this.passengers = passengers;
 	}
 
 	public void setPilots(List<Pilot> pilots) {

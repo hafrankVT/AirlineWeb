@@ -2,6 +2,7 @@ package com.airline.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -52,6 +54,9 @@ public class Passenger implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private FlightClass flightClass;
+	
+	@ManyToMany(mappedBy = "passengers") //the "mapped by" shows which column maps this many to many relationship.
+	private List<Flight> flights; //This is like flight tickets that the passenger holds.
 
 	public Integer getId() {
 		return id;
@@ -59,6 +64,14 @@ public class Passenger implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public List<Flight> getFlights() {
+		return flights;
+	}
+
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
 	}
 
 	public String getFirstName() {

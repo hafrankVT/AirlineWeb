@@ -11,7 +11,6 @@
 	<H1>List of Flights</H1>
 	<table>
 		<tr>
-<<<<<<< HEAD
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Date of Birth</th>
@@ -32,31 +31,6 @@
 		<%
 			}
 		%>
-
-=======
-			<th>Id</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>DOB</th>
-			<th>Gender</th>
-		</tr>
-
-		<%
-			List<Passenger> pList = (List<Passenger>) request.getAttribute("passenger_list");
-
-			for (int i = 0; i < pList.size(); i++) {
-		%>
-		<tr>
-			<td><%=pList.get(i).getId() %></td>
-			<td><%=pList.get(i).getFirstName()%></td>
-			<td><%=pList.get(i).getLastName()%></td>
-			<td><%=pList.get(i).getDob()%></td>
-			<td><%=pList.get(i).getGender()%></td>
-		</tr>
-		<%
-			}
-		%>
->>>>>>> branch 'JPA_Beginnings' of https://github.com/hafrankVT/AirlineWeb.git
 	</table>
 </body>
 </html>

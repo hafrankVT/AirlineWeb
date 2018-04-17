@@ -61,25 +61,37 @@ public class AddFlight extends HttpServlet {
 		//maybe returns a session variable with error codes? Trying to validate in here is sloppy as fuck.
 		// Make a Flight Object
 		Flight f = new Flight();
-		f.setFlightOrigin(FlightDestinations.The_Shire);
-		f.setFlightDestination(FlightDestinations.Mordor);
-		f.setPrice(400);
+		//Get the values
+		String to_destination = request.getParameter("to_destination");
+		String from_destination = request.getParameter("from_destination");
+		Integer price = Integer.parseInt(request.getParameter("price"));
+		Integer year = Integer.parseInt(request.getParameter("year"));
+		Integer month = Integer.parseInt(request.getParameter("month"));
+		Integer day = Integer.parseInt(request.getParameter("day"));
+		Integer hour = Integer.parseInt(request.getParameter("hour"));
+		Integer minute = Integer.parseInt(request.getParameter("minute"));
+		
+		//Set the values
+		f.setFlightOrigin(FlightDestinations.valueOf(from_destination));
+		f.setFlightDestination(FlightDestinations.valueOf(to_destination));
+		f.setPrice(price);
 
+		//Do all the calendar date building
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, 2018);
-		cal.set(Calendar.MONTH, 4);
-		cal.set(Calendar.DAY_OF_MONTH, 4);
-		cal.set(Calendar.HOUR_OF_DAY, 19);
-		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month);
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		cal.set(Calendar.HOUR_OF_DAY, hour);
+		cal.set(Calendar.MINUTE, minute);
 
 		Date flightTime = cal.getTime();
 		f.setFlightTime(flightTime);
 
 		// Make an Airplane Object
 		Airplane a = new Airplane();
-		a.setPlaneMake("Boeing");
-		a.setPlaneModel("787");
-		a.setSeatingCapacity(250);
+		a.setPlaneMake(request.getParameter("airplane_make"));
+		a.setPlaneModel(request.getParameter("airplane_model"));
+		a.setSeatingCapacity(Integer.parseInt(request.getParameter("airplane_seating")));
 
 		// Now that we have both objects, we need to connect them.
 		// Set the Airplane into the airplaneDetail on flight.

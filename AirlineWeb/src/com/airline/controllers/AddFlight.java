@@ -101,6 +101,7 @@ public class AddFlight extends HttpServlet {
 		System.out.println("The Airplane object is:" + a);
 
 		fs.addFlight(f, a);
+		response.sendRedirect("Flights");
 	}
 
 }

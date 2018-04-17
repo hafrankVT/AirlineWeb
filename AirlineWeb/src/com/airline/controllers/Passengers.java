@@ -45,6 +45,7 @@ public class Passengers extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/passenger_list.jsp");
 				
 				view.forward(request, response);
+
 	}
 
 	/**

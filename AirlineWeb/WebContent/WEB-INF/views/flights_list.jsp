@@ -65,6 +65,9 @@
 		<%
 			}
 		%>
+		<tr>
+			<td colspan="9">No passengers yet.</td>
+		</tr>
 	</table>
 </body>
 </html>

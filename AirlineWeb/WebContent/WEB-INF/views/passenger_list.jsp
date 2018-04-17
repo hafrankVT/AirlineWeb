@@ -28,6 +28,9 @@
 			<td><%=pList.get(i).getDob()%></td>
 			<td><%=pList.get(i).getGender()%></td>
 		</tr>
+		<tr>
+			<td colspan="4">No flight tickets yet.</td>
+		</tr>
 		<%
 			}
 		%>

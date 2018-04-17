@@ -70,7 +70,7 @@ public class Flight implements Serializable {
 	private List<Passenger> passengers;
 
 	public List<Pilot> getPilots() {
-		return pilots;
+		return pilots; 
 	}
 
 	public List<Passenger> getPassengers() {

@@ -31,7 +31,18 @@
 			<td><%=pList.get(i).getGender()%></td>
 		</tr>
 		<tr>
-			<td colspan="4">No flight tickets yet.</td>
+			<td colspan="5">
+				<%
+					if (pList.get(i).getFlights().size() > 0) {
+						List<Flight> fList = pList.get(i).getFlights();
+						
+						for (int k = 0; k<fList.size(); k++) {
+							%>
+							<%=k+1 %>) From <%=fList.get(k).getFlightOrigin() %> To <%=fList.get(k).getFlightDestination() %><BR> 
+						<% }//Close For %>
+				
+				<% }//Close If %>
+			</td>
 		</tr>
 		<%
 			}

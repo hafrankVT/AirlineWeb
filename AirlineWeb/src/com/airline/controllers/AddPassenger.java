@@ -98,7 +98,7 @@ public class AddPassenger extends HttpServlet {
 
 		Passenger p = new Passenger();
 
-		String firstName = request.getParameter("first-name");
+		String firstName = request.getParameter("first_name");
 		if (firstName.length() == 0) {
 			// Print error to system.out (or logger?) and set an error flag in the
 			// attributes.
@@ -111,7 +111,7 @@ public class AddPassenger extends HttpServlet {
 			request.setAttribute("first_name", firstName);
 		}
 
-		String lastName = request.getParameter("last-name");
+		String lastName = request.getParameter("last_name");
 
 		if (lastName.length() == 0) {
 			// Print error to system.out (or logger?) and set an error flag in the
@@ -145,7 +145,7 @@ public class AddPassenger extends HttpServlet {
 			// Convert to Date object
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.YEAR, Integer.parseInt(year));
-			cal.set(Calendar.MONTH, Integer.parseInt(month));
+			cal.set(Calendar.MONTH, Integer.parseInt(month) - 1);
 			cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
 
 			// Now, get the date from the calendar
@@ -170,28 +170,12 @@ public class AddPassenger extends HttpServlet {
 		// NOW, check for errors (if flag == true).
 		if ((boolean) request.getAttribute("errors")) {
 			// Forward back to the form jsp
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_passenger.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/fancy_forms.jsp");
 			view.forward(request, response);
 		} else {
-			System.out.println("New Passenger Object: " + p);
+			ps.addPassenger(p);
+			response.sendRedirect("Passengers");
 
-			// Here we mess with ServletContext. ServletContext is a call to the application
-			// scope.
-			ServletContext sc = this.getServletContext();
-
-			//Synchronized block which will allow only one user at a time to use this section of code.
-			//Prevents issues with both users pulling a list, adding a passenger and overwriting the values.
-			synchronized (this) {
-				ArrayList<Passenger> pList = (ArrayList<Passenger>) sc.getAttribute("passengers");
-				pList.add(p);
-
-				sc.setAttribute("passengers", pList); //Add the user to the list
-
-				// Redirect to the results page.
-				// This will create a brand new request, so we are no longer in Request scope!
-				// Need to create a new servlet for this to redirect to!
-			}
-			response.sendRedirect("");
 		}
 
 	}

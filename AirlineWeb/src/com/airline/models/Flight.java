@@ -62,7 +62,7 @@ public class Flight implements Serializable {
 	
 	
 	//One-To-Many relationship of Pilots
-	@OneToMany(mappedBy = "flightForPilot", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "flightForPilot")//, fetch = FetchType.EAGER)
 	private List<Pilot> pilots;
 	
 	@ManyToMany

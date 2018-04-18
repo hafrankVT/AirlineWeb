@@ -1,6 +1,7 @@
 package com.airline.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -36,7 +37,8 @@ public class AddPassengerToFlight extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("This is the AddPassengerToFlight Servlet.");
 	}
 
 	/**
@@ -48,7 +50,9 @@ public class AddPassengerToFlight extends HttpServlet {
 		
 		String fid = request.getParameter("fid");
 		String pid = request.getParameter("pid");
+		PrintWriter out = response.getWriter();
 		
+		out.println("Adding passenger " + pid + " to flight " + fid);
 		fs.addPassengerToFlight(pid, fid);
 		
 		response.sendRedirect("Flights");

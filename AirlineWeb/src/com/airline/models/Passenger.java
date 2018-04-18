@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,7 +56,7 @@ public class Passenger implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private FlightClass flightClass;
 	
-	@ManyToMany(mappedBy = "passengers") //the "mapped by" shows which column maps this many to many relationship.
+	@ManyToMany(mappedBy = "passengers", fetch=FetchType.EAGER) //the "mapped by" shows which column maps this many to many relationship.
 	private List<Flight> flights; //This is like flight tickets that the passenger holds.
 
 	public Integer getId() {

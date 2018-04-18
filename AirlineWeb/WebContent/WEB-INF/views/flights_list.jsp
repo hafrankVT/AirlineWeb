@@ -23,7 +23,7 @@
 		</tr>
 
 		<%
-			List<Flight> fList = (List<Flight>) request.getAttribute("flight_list");
+			List<Flight> fList = (List<Flight>) session.getAttribute("flight_list");
 
 			for (int i = 0; i < fList.size(); i++) {
 		%>
@@ -62,12 +62,24 @@
 				<%} %>
 			</td>
 		</tr>
+		
+		<tr>
+			<td colspan="9">
+			<%
+				if(fList.get(i).getPassengers().size() != 0){
+					List<Passenger> passengerList = fList.get(i).getPassengers();
+					
+					for(int k =0; k < passengerList.size(); k++) {
+			%>
+				<%= k+1 %>) <%=passengerList.get(k).getLastName() %>, <%=passengerList.get(k).getFirstName() %><BR>
+			<% } //Closes for loop %>
+			
+			<% } //Closes if %>
+			</td>
+		</tr>
 		<%
 			}
 		%>
-		<tr>
-			<td colspan="9">No passengers yet.</td>
-		</tr>
 	</table>
 </body>
 </html>

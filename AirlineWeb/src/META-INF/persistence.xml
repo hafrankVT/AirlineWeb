@@ -6,7 +6,10 @@
 	<persistence-unit name="airline">
 		<jta-data-source>java:/AirlineDB</jta-data-source>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.enable_lazy_load_no_trans"
+				value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>

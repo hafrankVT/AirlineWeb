@@ -65,6 +65,10 @@ public class FlightService {
 
 		// This adds the pilots to a list, updates the list on the Flight.
 	}
+	
+	public void addPassengerToFlight(String passengerId, String flightId) {
+		
+	}
 
 	public List<Flight> getFlights() {
 

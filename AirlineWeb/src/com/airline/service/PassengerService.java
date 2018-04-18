@@ -32,6 +32,10 @@ public class PassengerService {
     	em.persist(p); //This is what saves a passenger row into the table of the DB.
     }
     
+    public void addTicketToPassenger(String fid, String pid) {
+    	
+    }
+    
     public List<Passenger> getPassengers() {
     	TypedQuery<Passenger> pQuery = em.createQuery("SELECT p FROM Passenger p", Passenger.class);
     	

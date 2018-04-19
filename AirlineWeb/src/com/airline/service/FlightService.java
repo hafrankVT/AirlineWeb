@@ -95,12 +95,12 @@ public class FlightService {
 		CriteriaQuery<Flight> cqFlight = builder.createQuery(Flight.class);
 		Root<Flight> fRoot = cqFlight.from(Flight.class);
 		
-		cqPassenger.select(pRoot).where(builder.equal(fRoot.get("id").as(Integer.class), flightId));
+		cqFlight.select(fRoot).where(builder.equal(fRoot.get("id").as(Integer.class), flightId));
 
 		TypedQuery<Flight> fQuery = em.createQuery(cqFlight);
 		
 		Flight f = fQuery.getSingleResult();
-		
+//		
 		//Now we can do the associations.
 		
 		//DEBUG

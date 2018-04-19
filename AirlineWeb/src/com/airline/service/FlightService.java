@@ -103,16 +103,13 @@ public class FlightService {
 //		
 		//Now we can do the associations.
 		
-		//DEBUG
-		System.out.println("Attemping to add passenger to flight!");
-		System.out.println("Passenger SHOULD be: " + p);
-		System.out.println("FLIGHT SHOULD be: " + f);
 		List<Passenger> pList = f.getPassengers();
 		pList.add(p);
+		f.setPassengers(pList);
 		
-		List<Flight> fList = p.getFlights();
-		fList.add(f);
+		p.getFlights().add(f);
 	}
+	
 
 	public List<Flight> getFlights() {
 
